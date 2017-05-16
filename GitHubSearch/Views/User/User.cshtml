@@ -1,0 +1,90 @@
+﻿@model GitHubSearch.Models.User
+
+
+@{
+    ViewBag.Title = "User";
+}
+
+<h2></h2>
+@if (Model == null)
+{
+using (Html.BeginForm())
+{
+ <div>
+        <b>@Html.DisplayNameFor(model => model.Username)</b>
+            @Html.TextBoxFor(u => u.Username) @Html.ValidationMessageFor(u => u.Username)
+</div>
+<div class="submitDiv">
+    <input type="submit" value="Submit" />
+</div>
+}
+<div class="errMsg">
+    @ViewBag.errMsg
+</div>
+}
+@if (Model != null)
+{ 
+<div>
+    <h4>User Details</h4>
+    <hr class="mainhr" />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Avtar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Avtar)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <h4>Repo Details</h4>
+    <hr class="mainhr" />
+    @foreach (var repodesc in Model.RepoDetails)
+    {
+        <dl class="dl-horizontal">    
+            <dt>Id</dt>
+            <dd>@repodesc.Id</dd>
+            <dt>Name</dt>
+            <dd>@repodesc.RepoName</dd>
+            <dt>Html URL</dt>
+            <dd>@repodesc.HtmlURL</dd>
+            <dt>URL</dt>
+            <dd>@repodesc.URL</dd>
+            <dt>Stargazers Count</dt>
+            <dd>@repodesc.stargazers_count</dd>
+            <dt>Description</dt>
+            <dd>@repodesc.Description</dd>
+        </dl>
+        <hr  />
+    }
+</div>
+<div class="submitDiv">
+    <input type="button" value="Back" onclick="@Html.Raw("location.href='" + Url.Action("User") + "';")"  />
+</div>
+}
